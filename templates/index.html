@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/app.css">
+    <title>Image Compression</title>
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+    <script src="/static/app.js" defer></script>
+</head>
+
+<body>
+    <div align="center">
+        <h1>Image Compression</h1>
+
+        <div>
+            <br>
+            Select an image from your device for compression.
+            <br>
+            <form method="post" action="/compress" enctype="multipart/form-data">
+                <div class="upload-btn-wrapper">
+                    <input type="file" accept="image/*" name="file" id="file" class="imageInput" />
+                </div>
+                <div class="sumitDiv">
+                    <input class="btn btn-dark compress" type="submit" value="Compress">
+                </div>
+            </form>
+        </div>
+
+
+        <br>
+
+        <div> Original Image </div>
+        <div class="imageUpload d-flex justify-content-center align-items-center">
+            <div class="me-2 imageSize">0 bytes</div>
+            <div>
+                <img src="/static/original.jpg" class="image" alt="Image for compression">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="compressedImages">
+            <table>
+                <tr>
+                    <td>
+                        <div>Size</div>
+                    </td>
+                    <td>
+                        <div>Download</div>
+                    </td>
+                    <td>
+                        <div>Images</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- ci - CompressedImage -->
+                        <div class="ciSize">0 bytes</div>
+                    </td>
+                    <td>
+                        <a href="/static/ci1.jpeg" download="Compressed Image"><span class="iconify" data-icon="feather:download"></span></a>
+                    </td>
+                    <td>
+                        <img src="/static/ci1.jpeg" class="ci" alt="Compressed Image">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="ciSize">0 bytes</div>
+                    </td>
+                    <td>
+                        <a href="/static/ci2.jpeg" download="Compressed Image"><span class="iconify" data-icon="feather:download"></span></a>
+                    </td>
+                    <td>
+                        <img src="/static/ci2.jpeg" class="ci" alt="Compressed Image">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="ciSize">0 bytes</div>
+                    </td>
+                    <td>
+                        <a href="/static/ci3.jpeg" download="Compressed Image"><span class="iconify" data-icon="feather:download"></span></a>
+                    </td>
+                    <td>
+                        <img src="/static/ci3.jpeg" class="ci" alt="Compressed Image">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <br>
+</body>
+
+</html>
