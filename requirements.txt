@@ -6,3 +6,6 @@ seaborn
 jupyterlab
 flask
 jsonify
+requests
+uvicorn
+gunicorn
