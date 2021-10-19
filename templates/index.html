@@ -21,79 +21,83 @@
 
         <div>
             <br>
-            Select an image from your device for compression.
-            <br>
+            <div class="mb-1">
+                Select an image from your device for compression.
+            </div>
             <form method="post" action="/compress" enctype="multipart/form-data">
                 <div class="upload-btn-wrapper">
                     <input type="file" accept="image/*" name="file" id="file" class="imageInput" />
                 </div>
+                <br>
                 <div class="sumitDiv">
                     <input class="btn btn-dark compress" type="submit" value="Compress">
                 </div>
             </form>
         </div>
 
-
         <br>
 
-        <div> Original Image </div>
-        <div class="imageUpload d-flex justify-content-center align-items-center">
-            <div class="me-2 imageSize">0 bytes</div>
-            <div>
-                <img src="/static/original.jpg" class="image" alt="Image for compression">
+        <div class="spinner" hidden>
+            <div class="spinner-border text-dark" role="status">
+                <span class="sr-only"></span>
             </div>
+            <br>
+            <h6>Compressing...</h6>
         </div>
 
-        <br>
-
-        <div class="compressedImages">
+        <div class="originalImage" hidden>
+            <h3> Original Image </h3>
             <table>
                 <tr>
                     <td>
-                        <div>Size</div>
+                        Size
                     </td>
                     <td>
-                        <div>Download</div>
-                    </td>
-                    <td>
-                        <div>Images</div>
+                        Image
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <!-- ci - CompressedImage -->
-                        <div class="ciSize">0 bytes</div>
+                        <div class="me-2 imageSize">0 bytes</div>
                     </td>
                     <td>
-                        <a href="/static/ci1.jpeg" download="Compressed Image"><span class="iconify" data-icon="feather:download"></span></a>
-                    </td>
-                    <td>
-                        <img src="/static/ci1.jpeg" class="ci" alt="Compressed Image">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ciSize">0 bytes</div>
-                    </td>
-                    <td>
-                        <a href="/static/ci2.jpeg" download="Compressed Image"><span class="iconify" data-icon="feather:download"></span></a>
-                    </td>
-                    <td>
-                        <img src="/static/ci2.jpeg" class="ci" alt="Compressed Image">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ciSize">0 bytes</div>
-                    </td>
-                    <td>
-                        <a href="/static/ci3.jpeg" download="Compressed Image"><span class="iconify" data-icon="feather:download"></span></a>
-                    </td>
-                    <td>
-                        <img src="/static/ci3.jpeg" class="ci" alt="Compressed Image">
+                        <img class="image" alt="Image for compression">
                     </td>
                 </tr>
             </table>
+        </div>
+
+        <div class="compression" {{ hidden }}>
+            <h3>Compressed Image</h3>
+            <div class="compressedImage">
+                <table>
+                    <tr>
+                        <td>
+                            <div>Size</div>
+                        </td>
+                        <td>
+                            <div>Download</div>
+                        </td>
+                        <td>
+                            <div>Image</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- ci - CompressedImage -->
+                        <td>
+                            <div class="ciSize">0 bytes</div>
+                        </td>
+                        <td>
+                            <a href="data:image/jpeg;base64,{{ img_data }}" download>
+                                <span class="iconify" data-icon="feather:download"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <img src="data:image/jpeg;base64,{{ img_data }}" class="ci" alt="Compressed Image">
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 

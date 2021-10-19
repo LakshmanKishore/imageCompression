@@ -4,6 +4,8 @@ import jsonify
 import requests
 import numpy as np
 import pandas as pd
+import base64
+import io
 import matplotlib.image as mpimg
 from PIL import Image
 from sklearn.decomposition import PCA
@@ -20,14 +22,13 @@ def normalize(x):
     return np.array((x - np.min(x)) / (np.max(x) - np.min(x)))
 
 
-def compressImage():
-    imagepath = "static/original.jpg"
-    image = mpimg.imread(imagepath)
+def compressImage(file):
+    image = mpimg.imread(file)
     # Splitting the RED, BLUE and GREEN channels
     r,g,b = image[:,:,0],image[:,:,1],image[:,:,2]
 
     minSize = min(image.shape[0],image.shape[1])
-    n_components = [math.ceil(.4*minSize),math.ceil(.6*minSize),math.ceil(.8*minSize)]
+    n_components = [50]
 
     for i in range(len(n_components)):
         # RED
@@ -55,27 +56,28 @@ def compressImage():
 
         compressed = normalize(compressed)
         compressedImage = Image.fromarray((compressed * 255).astype(np.uint8))
-        compressedImage.save(f"static/ci{i+1}.jpeg")
+        
+        data = io.BytesIO()
+        compressedImage.save(data, "JPEG")
+        encoded_img_data = base64.b64encode(data.getvalue())
 
-    return 0
+    return render_template('index.html', img_data=encoded_img_data.decode('utf-8'))
 
 @app.route('/',methods=['GET'])
 def Home():
-    return render_template('index.html')
+    return render_template('index.html', hidden="hidden")
 
 @app.route('/compress', methods=['POST'])
 def compress():
     if 'file' not in request.files:
-        return redirect(request.url)
+        return render_template('index.html')
     file = request.files['file']
     if file.filename == '':
-        return redirect(request.url)
-    if file:
-        file.save("static/original.jpg")
-        compressImage()
         return render_template('index.html')
+    if file:
+        return compressImage(file)
     else:
-        return redirect(request.url)
+        return render_template('index.html')
 
 if __name__=="__main__":
     app.run(debug=True)

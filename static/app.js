@@ -1,10 +1,12 @@
 let imageInput = document.querySelector('.imageInput');
 let image = document.querySelector('.image');
 let imageSize = document.querySelector('.imageSize');
-let imageUpload = document.querySelector('.imageUpload');
-let ci = document.querySelectorAll('.ci');
-let ciSize = document.querySelectorAll('.ciSize');
+let ci = document.querySelector('.ci');
+let ciSize = document.querySelector('.ciSize');
+let originalImage = document.querySelector('.originalImage');
+let compression = document.querySelector('.compression');
 let compress = document.querySelector('.compress');
+let spinner = document.querySelector('.spinner');
 
 function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return '0 Bytes';
@@ -19,7 +21,7 @@ function formatBytes(bytes, decimals = 2) {
 }
 
 function setImageSize(imagePath, htmlSizeDiv) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("GET", imagePath, true);
     xhr.responseType = "arraybuffer";
     xhr.onreadystatechange = function () {
@@ -31,36 +33,29 @@ function setImageSize(imagePath, htmlSizeDiv) {
 }
 
 function loadImage(src) {
-    imageUpload.hidden = false;
+    originalImage.hidden = false;
     image.src = src;
+    compression.hidden = true
+    setImageSize(image.src, imageSize)
 }
 
-// function loadFile(e) {
-//     if (e.target.files) {
-//         let imageFile = e.target.files[0];
-//         let reader = new FileReader();
-//         reader.readAsDataURL(imageFile);
-//         reader.onloadend = function (e) {
-//             loadImage(e.target.result);
-//             imageSize.innerHTML = formatBytes(imageFile.size);
-//         }
-//     }
-// }
-
-function showCompressedImage(){
-    for (let index = 1; index <= ciSize.length; index++) {
-        const element = ciSize[index-1];
-        setImageSize(`/static/ci${index}.jpeg`, element);
+function loadFile(e) {
+    if (e.target.files) {
+        let imageFile = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(imageFile);
+        reader.onloadend = function (e) {
+            loadImage(e.target.result);
+            imageSize.innerHTML = formatBytes(imageFile.size);
+        }
     }
 }
 
-// function startCompress(){
-//     console.log("Started Compressing");
-//     fetch("/compress")
-// }
+function submit() {
+    spinner.hidden = false;
+}
 
-showCompressedImage();
-setImageSize("/static/original.jpg",imageSize)
+setImageSize(ci.src, ciSize)
 
-// imageInput.addEventListener('change', loadFile);
-// compress.addEventListener('click',startCompress);
+imageInput.addEventListener('change', loadFile);
+compress.addEventListener('click', submit);
