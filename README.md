@@ -3,8 +3,7 @@
 
 An end to end ML project.
 I have used PCA(an unsupervised algorithm) to compress the image.
-It takes the image from user and gives 3 different compressed images.
-**No big UI still under development**.
+It takes the image from user and gives a compressed image.
 
 
 ## Tech Stack
@@ -46,6 +45,7 @@ Start the server
 I was able to learn more about PCA.
 I was able to link the PCA to HTML with the help of flask.
 I learnt more about linking the images with flask and HTML.
+Learnt about adding a spinner(Loading symbol) in the web.
 
 
 ## Related
