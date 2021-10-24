@@ -68,7 +68,7 @@ def Home():
     return render_template('index.html', hidden="hidden")
 
 @app.route('/compress', methods=['POST'])
-def compress():
+async def compress():
     if 'file' not in request.files:
         return render_template('index.html')
     file = request.files['file']
