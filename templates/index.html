@@ -49,70 +49,71 @@
 
         <br>
 
-        <div class="spinner" hidden>
-            <div class="spinner-border text-dark" role="status">
-                <span class="sr-only"></span>
+        <div align="center">
+            <div class="spinner" hidden>
+                <div class="spinner-border text-dark" role="status">
+                    <span class="sr-only"></span>
+                </div>
+                <br>
+                <h6>Compressing...</h6>
             </div>
-            <br>
-            <h6>Compressing...</h6>
-        </div>
 
-        <div class="originalImage" hidden>
-            <h3> Original Image </h3>
-            <table>
-                <tr>
-                    <td>
-                        Size
-                    </td>
-                    <td>
-                        Image
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="me-2 imageSize">0 bytes</div>
-                    </td>
-                    <td>
-                        <img class="image" alt="Image for compression">
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="compression" {{ hidden }}>
-            <h3>Compressed Image</h3>
-            <div class="compressedImage">
+            <div class="originalImage" hidden>
+                <h3> Original Image </h3>
                 <table>
                     <tr>
                         <td>
-                            <div>Size</div>
+                            Size
                         </td>
                         <td>
-                            <div>Download</div>
-                        </td>
-                        <td>
-                            <div>Image</div>
+                            Image
                         </td>
                     </tr>
                     <tr>
-                        <!-- ci - CompressedImage -->
                         <td>
-                            <div class="ciSize">0 bytes</div>
+                            <div class="me-2 imageSize">0 bytes</div>
                         </td>
                         <td>
-                            <a href="data:image/jpeg;base64,{{ img_data }}" download>
-                                <span class="iconify" data-icon="feather:download"></span>
-                            </a>
-                        </td>
-                        <td>
-                            <img src="data:image/jpeg;base64,{{ img_data }}" class="ci" alt="Compressed Image">
+                            <img class="image" alt="Image for compression">
                         </td>
                     </tr>
                 </table>
             </div>
+
+            <div class="compression" {{ hidden }}>
+                <h3>Compressed Image</h3>
+                <div class="compressedImage">
+                    <table>
+                        <tr>
+                            <td>
+                                <div>Size</div>
+                            </td>
+                            <td>
+                                <div>Download</div>
+                            </td>
+                            <td>
+                                <div>Image</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- ci - CompressedImage -->
+                            <td>
+                                <div class="ciSize">0 bytes</div>
+                            </td>
+                            <td>
+                                <a href="data:image/jpeg;base64,{{ img_data }}" download>
+                                    <span class="iconify" data-icon="feather:download"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <img src="data:image/jpeg;base64,{{ img_data }}" class="ci" alt="Compressed Image">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
     <br>
 </body>
 
